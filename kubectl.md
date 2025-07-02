@@ -112,11 +112,11 @@ v1
 kubectl apply 与 kubectl create 都能创建资源
 ```
 ✅ 核心区别总结
-功能点	kubectl create	kubectl apply
-用途	初次创建资源	创建或更新资源（推荐方式）
-是否幂等	否（重复执行会报错）	是（多次执行不会报错，且支持自动合并）
-更新资源	❌ 不能更新已存在资源	✅ 可以更新已有资源
-推荐程度	一般仅用于简单/临时资源	✅ 推荐用于部署、配置管理、CI/CD
-使用机制	直接创建资源（POST）	使用 kubectl.kubernetes.io/last-applied-configuration 做对比和合并
-对 YAML 的需求	每次都应是完整的资源定义	可以只包含修改的字段（建议完整）
+功能点	                 kubectl create	                  kubectl apply
+用途	                 初次创建资源	                    创建或更新资源（推荐方式）
+是否幂等	               否（重复执行会报错）	              是（多次执行不会报错，且支持自动合并）
+更新资源	               ❌ 不能更新已存在资源	            ✅ 可以更新已有资源
+推荐程度	               一般仅用于简单/临时资源	          ✅ 推荐用于部署、配置管理、CI/CD
+使用机制	               直接创建资源（POST）	            使用 kubectl.kubernetes.io/last-applied-configuration 做对比和合并
+对 YAML 的需求	         每次都应是完整的资源定义	          可以只包含修改的字段（建议完整）
 ```
