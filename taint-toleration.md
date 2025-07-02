@@ -112,7 +112,15 @@ tolerations:
   operator: "Equal"
   value: "highcpu"
   effect: "NoSchedule"
-
+```
+or
+```
+tolerations:
+- key: "type"
+  operator: "Exists"
+  effect: "NoSchedule"
+```
+```
 operator：
 Equal  ：默认值。表示 key 和 value 都要匹配 才容忍
 Exists ：表示 只匹配 key 就行，value 不重要
