@@ -120,3 +120,17 @@ kubectl apply 与 kubectl create 都能创建资源
 使用机制	               直接创建资源（POST）	            使用 kubectl.kubernetes.io/last-applied-configuration 做对比和合并
 对 YAML 的需求	         每次都应是完整的资源定义	          可以只包含修改的字段（建议完整）
 ```
+### 4. kubectl expose
+kubectl expose 是一个快捷命令，用于基于已有的 Pod、Deployment、ReplicaSet、Service 等资源 快速创建一个 Service（服务资源），让其他组件可以访问这些资源
+```
+kubectl expose RESOURCE NAME [--port=PORT] [--target-port=TARGET_PORT] [--type=TYPE] [flags]
+
+RESOURCE	要暴露的资源类型（如 deployment、pod、rc）
+NAME	要暴露的资源名称
+--port	Service 对外暴露的端口（port 字段）
+--target-port	容器中实际监听的端口（targetPort 字段）
+--type	Service 类型，常见有 ClusterIP（默认）、NodePort、LoadBalancer
+
+kubectl expose deployment nginx-deployment --port=80 --target-port=80
+kubectl expose deployment nginx-deployment --port=80 --target-port=80 --type=NodePort
+```
