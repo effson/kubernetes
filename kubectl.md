@@ -80,3 +80,43 @@ csistoragecapacities                           storage.k8s.io/v1                
 storageclasses                    sc           storage.k8s.io/v1                 false        StorageClass
 volumeattachments                              storage.k8s.io/v1                 false        VolumeAttachment
 ```
+### 2. kubectl api-versions
+列出 当前 Kubernetes 集群中支持的所有 API 版本
+```
+root@master01:/home/jeff/k8s/deployment# kubectl api-versions
+admissionregistration.k8s.io/v1
+apiextensions.k8s.io/v1
+apiregistration.k8s.io/v1
+apps/v1
+authentication.k8s.io/v1
+authorization.k8s.io/v1
+autoscaling/v1
+autoscaling/v2
+batch/v1
+certificates.k8s.io/v1
+coordination.k8s.io/v1
+crd.projectcalico.org/v1
+discovery.k8s.io/v1
+events.k8s.io/v1
+flowcontrol.apiserver.k8s.io/v1
+flowcontrol.apiserver.k8s.io/v1beta3
+networking.k8s.io/v1
+node.k8s.io/v1
+policy/v1
+rbac.authorization.k8s.io/v1
+scheduling.k8s.io/v1
+storage.k8s.io/v1
+v1
+```
+### 3. kubectl apply 、kubectl create
+kubectl apply 与 kubectl create 都能创建资源
+```
+✅ 核心区别总结
+功能点	kubectl create	kubectl apply
+用途	初次创建资源	创建或更新资源（推荐方式）
+是否幂等	否（重复执行会报错）	是（多次执行不会报错，且支持自动合并）
+更新资源	❌ 不能更新已存在资源	✅ 可以更新已有资源
+推荐程度	一般仅用于简单/临时资源	✅ 推荐用于部署、配置管理、CI/CD
+使用机制	直接创建资源（POST）	使用 kubectl.kubernetes.io/last-applied-configuration 做对比和合并
+对 YAML 的需求	每次都应是完整的资源定义	可以只包含修改的字段（建议完整）
+```
