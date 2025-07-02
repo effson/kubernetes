@@ -103,3 +103,17 @@ Taints:             key=forbiddenkey:NoSchedule
 root@master01:/home/jeff/k8s/deployment# kubectl taint node worker01 key=forbiddenkey:NoSchedule-
 node/worker01 untainted
 ```
+### 2. toleration
+toleration 是加在 Pod 上的，表示“可以容忍某些 taint”<br>
+YAML：
+```
+tolerations:
+- key: "type"
+  operator: "Equal"
+  value: "highcpu"
+  effect: "NoSchedule"
+
+operator：
+Equal  ：默认值。表示 key 和 value 都要匹配 才容忍
+Exists ：表示 只匹配 key 就行，value 不重要
+```
