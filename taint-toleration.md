@@ -107,6 +107,7 @@ node/worker01 untainted
 toleration 是加在 Pod 上的，表示“可以容忍某些 taint”<br>
 YAML：
 ```
+pod的spec分支:
 tolerations:
 - key: "type"
   operator: "Equal"
