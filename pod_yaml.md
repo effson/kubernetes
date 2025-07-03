@@ -40,5 +40,32 @@ spec:
           secretKeyRef:
             name: demo-secret
             key: token
+```
+### initContainer:<br>
+initContainer 是 Kubernetes Pod 中的一种特殊容器，在主容器（即 containers 中的容器）启动之前 先执行初始化任务。
+可以有一个或多个 initContainer，按顺序串行执行，全部成功后才会启动主容器.
+#### 🔧 作用：
+做初始化工作，比如：<br>
+下载配置文件<br>
+检查依赖服务是否就绪<br>
+拷贝文件或设置权限<br>
+等待数据库、Redis 等服务启动完毕<br>
+避免在主容器中写很多复杂的启动逻辑脚本，让职责更清晰<br>
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: with-init
+spec:
+  initContainers:
+  - name: init-myservice
+    image: busybox
+    command: ['sh', '-c', 'until nslookup myservice; do echo waiting; sleep 2; done']
+
+  containers:
+  - name: app
+    image: nginx
+    ports:
+    - containerPort: 80
 
 ```
