@@ -41,7 +41,7 @@ spec:
             name: demo-secret
             key: token
 ```
-### initContainer:<br>
+### initContainers:<br>
 initContainer 是 Kubernetes Pod 中的一种特殊容器，在主容器（即 containers 中的容器）启动之前 先执行初始化任务。
 可以有一个或多个 initContainer，按顺序串行执行，全部成功后才会启动主容器.
 #### 🔧 作用：
@@ -67,5 +67,18 @@ spec:
     image: nginx
     ports:
     - containerPort: 80
-
+```
+myservice 是在 Kubernetes 集群中定义的 Service 的名字，不断执行 <mark>nslookup myservice</mark>，直到它能解析成功（说明 myservice 服务已创建并在 DNS 中可解析），否则每隔 2 秒打印一次 waiting<br>
+创建了以下一个名为 myservice 的 Service：
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: myservice
+spec:
+  selector:
+    app: app_nginx
+  ports:
+    - port: 80
+      targetPort: 80
 ```
