@@ -60,7 +60,7 @@ spec:
   initContainers:
   - name: init-myservice
     image: busybox
-    command: ['sh', '-c', 'until nslookup myservice; do echo waiting; sleep 2; done']
+    command: ['sh', '-c', 'until nslookup myservice.default.svc.cluster.local; do echo waiting; sleep 2; done']
 
   containers:
   - name: app
