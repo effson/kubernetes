@@ -350,3 +350,15 @@ kube-proxy-xjqz2                           1/1     Running   0             12h
 kube-scheduler-master01                    1/1     Running   1 (11h ago)   12h
 
 ```
+### 7. kubectl exec
+用于在 Pod 内部执行命令的命令。允许直接与运行中的容器进行交互，执行命令、调试应用程序
+```
+kubectl exec [OPTIONS] POD_NAME -- COMMAND [args...]
+
+常用选项
+-i 或 --stdin: 允许你将标准输入流传递给容器。
+-t 或 --tty: 分配一个伪终端，常用于交互式命令。
+-c 或 --container: 指定要在其中执行命令的容器名称（在多容器 Pod 中使用）。
+--namespace: 指定命名空间（如果不是默认命名空间）。
+--timeout: 设置执行命令的超时时间。
+```
