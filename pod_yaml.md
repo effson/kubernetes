@@ -97,3 +97,24 @@ spec:
         exec:
           command: ["/bin/sh", "-c", "echo 'Container started! >> /tmp/data'"]
 ```
+### containers.startupProbe
+```
+spec:
+  containers:
+  - name: xxx
+    image: xxx
+    lifecycle: xxx
+    startupProbe:
+      exec:
+        command: ["bin/sh", "-c", "health check command"]
+      # 容器启动后第一次探测的延迟时间
+      initialDelaySeconds: 5
+      # 探测的间隔时间
+      periodSeconds: 10
+      # 探测请求的超时时间
+      timeoutSeconds: 2
+      # 认为探测失败所需的连续失败次数
+      failureThreshold: 3
+      # 认为探测成功所需的成功次数
+      successThreshold: 3    
+```
