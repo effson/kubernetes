@@ -82,3 +82,18 @@ spec:
     - port: 80
       targetPort: 80
 ```
+### containers.lifecycle
+定义容器的生命周期管理，包括在容器启动、停止或终止时执行特定的操作
+```
+spec:
+  containers:
+  - name: xxx
+    image: xxx
+    lifecycle:
+      preStop:
+        exec:
+          command: ["/bin/sh", "-c", "echo 'Stopping container...'"]
+      postStart:
+        exec:
+          command: ["/bin/sh", "-c", "echo 'Container started!'"]
+```
