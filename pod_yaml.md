@@ -115,6 +115,23 @@ spec:
       timeoutSeconds: 2
       # 认为探测失败所需的连续失败次数
       failureThreshold: 3
-      # 认为探测成功所需的成功次数
-      successThreshold: 3    
+      # 认为探测成功所需的成功次数，存活和启动探测必须为1
+      successThreshold: 1    
+```
+### containers.readinessProbe
+```
+spec:
+  containers:
+  - name: xxx
+    image: xxx
+    lifecycle: xxx
+    readinessProbe:
+      httpGet:
+        path: /ready
+        port: 8080
+      initialDelaySeconds: 5
+      periodSeconds: 10
+      timeoutSeconds: 2
+      failureThreshold: 3
+         
 ```
