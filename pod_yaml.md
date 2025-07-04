@@ -132,6 +132,21 @@ spec:
       initialDelaySeconds: 5
       periodSeconds: 10
       timeoutSeconds: 2
-      failureThreshold: 3
-         
+      failureThreshold: 3         
+```
+### containers.livenessProbe
+```
+spec:
+  containers:
+  - name: xxx
+    image: xxx
+    lifecycle: xxx
+    livenessProbe:
+      httpGet:
+        path: /ready
+        port: 8080
+      initialDelaySeconds: 5
+      periodSeconds: 10
+      timeoutSeconds: 2
+      failureThreshold: 3         
 ```
