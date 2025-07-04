@@ -92,8 +92,8 @@ spec:
     lifecycle:
       preStop:
         exec:
-          command: ["/bin/sh", "-c", "echo 'Stopping container...'"]
+          command: ["/bin/sh", "-c", "echo 'Stopping container... >> /tmp/data'"]
       postStart:
         exec:
-          command: ["/bin/sh", "-c", "echo 'Container started!'"]
+          command: ["/bin/sh", "-c", "echo 'Container started! >> /tmp/data'"]
 ```
