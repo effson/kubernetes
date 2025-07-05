@@ -78,7 +78,7 @@ kind: Deployment
 metadata:
   name: my-app
   labels:
-  app: my-app
+    app: my-app
 spec:
   selector:
     matchLabels:
@@ -107,4 +107,40 @@ configMapGenerator:
 - name: example-configmap-env
   envs:
   - .env
+```
+> kubectl kustomize ./
+```
+root@master01:/home/kustomize/k2# kubectl kustomize ./
+apiVersion: v1
+data:
+  FOO: Bar
+kind: ConfigMap
+metadata:
+  name: example-configmap-env-42cfbf598f
+---
+apiVersion: v1
+kind: Deployment
+metadata:
+  labels:
+    app: my-app
+  name: my-app
+spec:
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+      spec:
+        containers:
+        - image: my-app
+          name: app
+          volumeMounts:
+          - mountPath: /config
+            name: config
+        volumes:
+        - configMap:
+            name: example-configmap-env-42cfbf598f
+          name: config
 ```
