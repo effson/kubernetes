@@ -12,3 +12,34 @@ kubectl kustomize <kustomization_directory>
 ```
 kubectl apply -k <目录路径>
 ```
+## 2.3 命令使用
+### 2.3.1 生成资源
+#### 2.3.1.1 生成configMap
+```
+root@master01:/home/kustomize/k1# cat <<EOF >application.properties
+> FOO=Bar
+> EOF
+
+root@master01:/home/kustomize/k1# ls
+application.properties
+root@master01:/home/kustomize/k1# cat <<EOF >./kustomization.yaml
+> configMapGenerator:
+> - name: example-configmap-v1
+>   files:
+>   - application.properties
+> EOF
+
+root@master01:/home/kustomize/k1# ls
+application.properties  kustomization.yaml
+
+
+root@master01:/home/kustomize/k1# kubectl kustomize ./
+apiVersion: v1
+data:
+  application.properties: |
+    FOO=Bar
+kind: ConfigMap
+metadata:
+  name: example-configmap-v1-g4hk9g2ff8
+
+```
