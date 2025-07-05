@@ -144,3 +144,9 @@ spec:
             name: example-configmap-env-42cfbf598f
           name: config
 ```
+#### 2.3.1.3 设置贯穿性字段
+贯穿性字段在 Kustomize 中的术语叫做：全局变更字段（Global fields），也称为统一注入字段：使用场景如下：
+- 设置所有资源所属命名空间
+- 为所有对象添加相同前缀/后缀
+- 为对象添加相同的标签(Label)集合
+- 为对象添加相同的注解(Annotations)集合
