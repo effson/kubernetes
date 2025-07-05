@@ -1,4 +1,4 @@
-# Kubernetes集群包管理解决方案及应用商店 Helm&Kubeapps
+# K8s集群包管理及应用商店Helm&Kubeapps
 
 
 
@@ -63,8 +63,7 @@
 7、访问nginx服务
 
 
-
-![image-20220728133433498](Kubernetes集群包管理解决方案 Helm.assets/image-20220728133433498.png)
+![image-20220728133433498](https://github.com/user-attachments/assets/bda37829-b3da-4faa-af46-2b8d69f1551e)
 
 
 
@@ -92,7 +91,7 @@
 
 
 
-![image-20220728134805687](Kubernetes集群包管理解决方案 Helm.assets/image-20220728134805687.png)
+![image-20220728134805687](https://github.com/user-attachments/assets/9be4df09-d943-439c-9f8c-c9f040772b2d)
 
 
 
@@ -135,11 +134,11 @@ Helm作为K8s的包管理软件，每次安装Charts 到K8s集群时，都会创
 
 
 
-![image-20220728135524226](Kubernetes集群包管理解决方案 Helm.assets/image-20220728135524226.png)
+![image-20220728135524226](https://github.com/user-attachments/assets/69598246-5b48-4ca2-b93e-d4d95adc0bab)
 
 
 
-![image-20220728140109073](Kubernetes集群包管理解决方案 Helm.assets/image-20220728140109073.png)
+![image-20220728140109073](https://github.com/user-attachments/assets/ab7b03c2-35a1-4d76-b1a3-9223d7facaf5)
 
 
 
@@ -151,30 +150,19 @@ Helm客户端使用REST+JSON的方式与K8s中的apiserver进行交互，进而�
 
 
 
-![image-20220728140501620](Kubernetes集群包管理解决方案 Helm.assets/image-20220728140501620.png)
+![image-20220728140501620](https://github.com/user-attachments/assets/24ad9ace-5661-4ba6-a366-02aef4d6b541)
 
 
 
-![image-20220728140538044](Kubernetes集群包管理解决方案 Helm.assets/image-20220728140538044.png)
-
-
-
-
-
-![image-20220728140644543](Kubernetes集群包管理解决方案 Helm.assets/image-20220728140644543.png)
+![image-20220728140538044](https://github.com/user-attachments/assets/85bf36d2-dd34-4a63-979c-e8115a8e7ab2)
 
 
 
 
 
-![image-20220728141000714](Kubernetes集群包管理解决方案 Helm.assets/image-20220728141000714.png)
-
-
-
-![image-20220728141101419](Kubernetes集群包管理解决方案 Helm.assets/image-20220728141101419.png)
-
-
-
+![image-20220728140644543](https://github.com/user-attachments/assets/16305325-7b92-4f42-b063-d0d8fdae122a)
+![image-20220728141000714](https://github.com/user-attachments/assets/cef1b5f4-8b15-4b32-a670-a3eb688ab4f8)
+![image-20220728141101419](https://github.com/user-attachments/assets/cb1d09dd-1b80-4413-8ffe-0bbe49288f6a)
 
 
 ~~~powershell
@@ -1519,47 +1507,23 @@ Please set --with-chartmuseum if needs enable Chartmuseum in Harbor
 
 > 在主机上解决域名 192.168.10.146 www.kubemsb.com
 
+![image-20220730112415250](https://github.com/user-attachments/assets/553c9ebc-4390-4276-834a-58162013ca7b)
 
+![image-20220730112450460](https://github.com/user-attachments/assets/7576625c-23d8-4e8b-bc88-50a8b5dd4829)
 
-![image-20220730112415250](Kubernetes集群包管理解决方案 Helm.assets/image-20220730112415250.png)
+![image-20220730112550547](https://github.com/user-attachments/assets/fd959ece-02e0-4bc7-a420-ed7691be88a2)
 
+![image-20220730112628591](https://github.com/user-attachments/assets/55c875ab-a3a4-49c9-9692-dbf009372e41)
 
+![image-20220730112729226](https://github.com/user-attachments/assets/98a8345f-e612-4aa5-a76d-85d5fff10754)
 
-![image-20220730112450460](Kubernetes集群包管理解决方案 Helm.assets/image-20220730112450460.png)
+![image-20220730113015244](https://github.com/user-attachments/assets/ba428e0e-8922-4c0e-b90a-b9a3e3b65c9e)
 
+![image-20220730113039787](https://github.com/user-attachments/assets/6e9563d6-91ad-49c9-9b70-4a9ec6cf78cb)
 
+![image-20220730113133287](https://github.com/user-attachments/assets/14c10cfd-d6f3-4669-a01e-c9a97c65e666)
 
-
-
-![image-20220730112550547](Kubernetes集群包管理解决方案 Helm.assets/image-20220730112550547.png)
-
-
-
-![image-20220730112628591](Kubernetes集群包管理解决方案 Helm.assets/image-20220730112628591.png)
-
-
-
-![image-20220730112729226](Kubernetes集群包管理解决方案 Helm.assets/image-20220730112729226.png)
-
-
-
-
-
-![image-20220730113015244](Kubernetes集群包管理解决方案 Helm.assets/image-20220730113015244.png)
-
-
-
-![image-20220730113039787](Kubernetes集群包管理解决方案 Helm.assets/image-20220730113039787.png)
-
-
-
-
-
-![image-20220730113133287](Kubernetes集群包管理解决方案 Helm.assets/image-20220730113133287.png)
-
-
-
-![image-20220730113158610](Kubernetes集群包管理解决方案 Helm.assets/image-20220730113158610.png)
+![image-20220730113158610](https://github.com/user-attachments/assets/1a43fd43-6dd3-449d-8a9a-7dea18d9d3ed)
 
 
 
@@ -1683,14 +1647,7 @@ Pushing helm-nginx-1.1.0.tgz to harborhelm...
 Done.
 ~~~
 
-
-
-
-
-![image-20220730232227146](Kubernetes集群包管理解决方案 Helm.assets/image-20220730232227146.png)
-
-
-
+![image-20220730232227146](https://github.com/user-attachments/assets/50d950ea-25d2-438d-8fdd-738cb36baec8)
 
 
 # 八、Helm Chart包可视化管理 Kubeapps应用商店
@@ -1703,9 +1660,7 @@ Kubeapps提供了一个开源的Helm UI界面，方便以图形界面的形式�
 - 管理应用。升级、管理和删除部署在kubernetes集群中的应用程序；
 - 搜索功能。Kubeapps提供chart搜索页面；
 
-
-
-![image-20220730235006506](Kubernetes集群包管理解决方案 Helm.assets/image-20220730235006506.png)
+![image-20220730235006506](https://github.com/user-attachments/assets/5b3e18b7-bedb-4be9-a121-45b056b9a8a7)
 
 
 
@@ -1868,23 +1823,13 @@ spec:
 ingress.networking.k8s.io/ingress-kubeapps created
 ~~~
 
+![image-20220731003858917](https://github.com/user-attachments/assets/8ae07964-eb42-49ba-813e-7c79ffb0ec70)
 
 
-![image-20220731003858917](Kubernetes集群包管理解决方案 Helm.assets/image-20220731003858917.png)
-
-
-
-
-
-![image-20220731003937933](Kubernetes集群包管理解决方案 Helm.assets/image-20220731003937933.png)
-
-
-
+![image-20220731003937933](https://github.com/user-attachments/assets/29efc083-51a0-4ac0-a524-6c9d0bc24d24)
 
 
 参考链接：https://kubeapps.dev/docs/latest/tutorials/getting-started/
-
-
 
 ~~~powershell
 创建用户
@@ -1893,16 +1838,11 @@ serviceaccount/kubeapps-operator created
 ~~~
 
 
-
 ~~~powershell
 绑定集群管理员角色
 [root@k8s-master01 ~]# kubectl create clusterrolebinding kubeapps-operator --clusterrole=cluster-admin --serviceaccount=default:kubeapps-operator
 clusterrolebinding.rbac.authorization.k8s.io/kubeapps-operator created
 ~~~
-
-
-
-
 
 ~~~powershell
 [root@k8s-master01 ~]# cat <<EOF | kubectl apply -f -
@@ -1930,23 +1870,13 @@ eyJhbGciOiJSUzI1NiIsImtpZCI6ImRneWtqS2s2OWFsZU94UklERWh5SlhMSk56SUZZQzZOYlhHbUZI
 ~~~
 
 
+![image-20220731005426854](https://github.com/user-attachments/assets/e1411af6-44ee-421d-9c7b-6c2223825099)
 
-![image-20220731005426854](Kubernetes集群包管理解决方案 Helm.assets/image-20220731005426854.png)
+![image-20220731005445694](https://github.com/user-attachments/assets/38f67192-67e3-48ea-b90a-5911099f8e24)
 
+![image-20220731005818965](https://github.com/user-attachments/assets/3e130ebf-8625-41c9-8edc-f7fa9357f430)
 
-
-
-
-![image-20220731005445694](Kubernetes集群包管理解决方案 Helm.assets/image-20220731005445694.png)
-
-
-
-![image-20220731005818965](Kubernetes集群包管理解决方案 Helm.assets/image-20220731005818965.png)
-
-![image-20220731005916797](Kubernetes集群包管理解决方案 Helm.assets/image-20220731005916797.png)
-
-
-
+![image-20220731005916797](https://github.com/user-attachments/assets/bbf083cb-48b1-4f33-a76b-103bc988d520)
 
 
 ## 8.4 通过kubeapps部署应用案例
@@ -1954,20 +1884,18 @@ eyJhbGciOiJSUzI1NiIsImtpZCI6ImRneWtqS2s2OWFsZU94UklERWh5SlhMSk56SUZZQzZOYlhHbUZI
 ### 8.4.1 通过kubeapps部署nginx
 
 ![image-20220731122417628](Kubernetes集群包管理解决方案 Helm.assets/image-20220731122417628.png)
-
-
-
+![image-20220731122417628](https://github.com/user-attachments/assets/252106a1-722d-4cb7-9baa-39d05dd1a513)
 
 
 ![image-20220731122509569](Kubernetes集群包管理解决方案 Helm.assets/image-20220731122509569.png)
-
-
+![image-20220731122509569](https://github.com/user-attachments/assets/2d626619-af32-4f42-ae59-8f4b1b98708b)
 
 ![image-20220731122923839](Kubernetes集群包管理解决方案 Helm.assets/image-20220731122923839.png)
-
+![image-20220731122923839](https://github.com/user-attachments/assets/c54bf2d6-fd9a-4ffa-b9d1-c59bd8e2ac1d)
 
 
 ![image-20220731123010719](Kubernetes集群包管理解决方案 Helm.assets/image-20220731123010719.png)
+![image-20220731123010719](https://github.com/user-attachments/assets/23052862-50ea-44a4-ab37-124238fdfb6a)
 
 
 
@@ -1991,38 +1919,19 @@ kubemsb-web-nginx-55fdb5bfd6-4cfpg                           1/1     Running    
 snv
 
 
+![image-20220731123232615](https://github.com/user-attachments/assets/96f2e9bf-5d4c-46a4-aa7b-41b3ae489fc5)
 
+![image-20220731123317237](https://github.com/user-attachments/assets/0e3b2433-d065-4a3f-9a67-55e0ad71cf0d)
 
+![image-20220731123435198](https://github.com/user-attachments/assets/6df961b8-74be-4ba9-baef-ecb4e5e881e6)
 
+![image-20220731123604413](https://github.com/user-attachments/assets/2eddcfb6-1cfd-4eaf-bb5a-bb95a5691714)
 
+![image-20220731123706442](https://github.com/user-attachments/assets/fecfe96e-1dd2-40b6-afd6-64bc52a58023)
 
-![image-20220731123232615](Kubernetes集群包管理解决方案 Helm.assets/image-20220731123232615.png)
+![image-20220731123928124](https://github.com/user-attachments/assets/1d03616c-8cb1-4c70-94dd-5a72d633fcce)
 
-
-
-
-
-![image-20220731123317237](Kubernetes集群包管理解决方案 Helm.assets/image-20220731123317237.png)
-
-
-
-![image-20220731123435198](Kubernetes集群包管理解决方案 Helm.assets/image-20220731123435198.png)
-
-
-
-![image-20220731123604413](Kubernetes集群包管理解决方案 Helm.assets/image-20220731123604413.png)
-
-
-
-![image-20220731123706442](Kubernetes集群包管理解决方案 Helm.assets/image-20220731123706442.png)
-
-
-
-![image-20220731123928124](Kubernetes集群包管理解决方案 Helm.assets/image-20220731123928124.png)
-
-
-
-![image-20220731124059841](Kubernetes集群包管理解决方案 Helm.assets/image-20220731124059841.png)
+![image-20220731124059841](https://github.com/user-attachments/assets/9df37eed-0b82-48a7-819b-a1fc7664a254)
 
 
 
