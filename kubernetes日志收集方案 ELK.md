@@ -25,11 +25,7 @@
 # 三、日志收集方案
 
 ## 3.1 日志收集技术栈ELK(ELKB)  +  Filebeat
-
-
-
-![](kubernetes日志收集方案 ELK.assets/image-20200106175502929.png)
-
+![image-20200106175502929](https://github.com/user-attachments/assets/ff557e7d-b081-439d-8986-97982fcb0048)
 
 
 
