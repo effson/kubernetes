@@ -209,5 +209,4 @@ spec:
         containers:
         - image: nginx
           name: nginx
-
 ```
