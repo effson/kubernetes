@@ -1,7 +1,5 @@
 # K8s集群包管理及应用商店Helm&Kubeapps
 
-
-
 # 一、引入helm原因
 
 当今的软件开发，随着云原生技术的普及，我们的工程应用进行微服务化和容器化的现象也变得越来越普遍。而Kubernetes几乎已经成了云原生服务编排绕不开的标准和技术。
@@ -14,15 +12,11 @@
 # kubectl create deployment nginx --image=nginx --dry-run=client -o yaml > deployment.yaml
 ~~~
 
-
-
 2、启动nginx的pod
 
 ~~~powershell
 # kubectl apply -f deployment.yaml
 ~~~
-
-
 
 3、检查pod服务
 
@@ -30,17 +24,11 @@
 # kubectl get pod
 ~~~
 
-
-
 4、创建service
-
-
 
 ~~~powershell
 # kubectl expose deployment  nginx --port=8099 --target-port=80 --type=NodePort --dry-run=client -o yaml > service.yaml
 ~~~
-
-
 
 5、启动service服务
 
@@ -48,26 +36,15 @@
 # kubectl apply -f service.yaml
 ~~~
 
-
-
 6、检查service端口
-
-
 
 ~~~powershell
 # kubectl get svc
 ~~~
 
-
-
 7、访问nginx服务
 
-
 ![image-20220728133433498](https://github.com/user-attachments/assets/bda37829-b3da-4faa-af46-2b8d69f1551e)
-
-
-
-
 
 实际生产中，微服务项目可能有十几个模块，若还需要进行安全访问和控制，那么需要创建诸如Role、ServiceAccount等资源。部署和版本升级时也往往需要修改或添加配置文件中的一些参数（例如：服务占用的CPU、内存、副本数、端口等），维护大量的yaml文件极为不便，所以，我们需要将这些YAML文件作为一个**整体**管理，并高效复用。
 
@@ -80,22 +57,13 @@
 那么在CNCF的体系中是否存在这样的强力“工具”，能够简化我们部署安装过程呢？答案是存在的，Helm就是这样一款工具。
 
 
-
-
-
 # 二、helm是什么
 
 - 官方: https://helm.sh/
 
 - 作为CNCF的毕业项目。它的官方的定义是：Helm是一个为K8s进行包管理的工具。Helm将yaml作为一个整体管理并实现了这些yaml的高效复用，就像Linux中的yum或apt-get，它使我们能够在K8s中方便快捷的安装、管理、卸载K8s应用。
 
-
-
 ![image-20220728134805687](https://github.com/user-attachments/assets/9be4df09-d943-439c-9f8c-c9f040772b2d)
-
-
-
-
 
 * Helm(舵柄; 舵轮)是一个Kubernetes的包管理工具，就像Linux下的包管理器，如yum/apt等。
 * helm一个命令行客户端工具，主要用于Kubernetes应用chart的创建、打包、发布和管理。
@@ -105,10 +73,6 @@
 * 除此以外，Helm还提供了kubernetes上的软件部署，删除，升级，回滚应用的强大功能。
 * Helm 社区已经维护了一个官方 Helm Hub，我们可以直接使用已经做好的 Helm Chart，部署和管理比较复杂的应用程序
 * 早期的hub.helm.dev转移到了https://artifacthub.io/。
-
-
-
-
 
 # 三、helm作用及核心概念
 
@@ -126,39 +90,19 @@ Helm中有三个重要概念，分别为Chart、Repository和Release。
 
 Helm作为K8s的包管理软件，每次安装Charts 到K8s集群时，都会创建一个新的 release。你可以在Helm 的Repository中寻找需要的Chart。Helm对于部署过程的优化的点在于简化了原先完成配置文件编写后还需使用一串kubectl命令进行的操作、统一管理了部署时的可配置项以及方便了部署完成后的升级和维护。
 
-
-
 # 三、helm架构
-
-
-
-
 
 ![image-20220728135524226](https://github.com/user-attachments/assets/69598246-5b48-4ca2-b93e-d4d95adc0bab)
 
-
-
 ![image-20220728140109073](https://github.com/user-attachments/assets/ab7b03c2-35a1-4d76-b1a3-9223d7facaf5)
-
-
 
 Helm客户端使用REST+JSON的方式与K8s中的apiserver进行交互，进而管理deployment、service等资源，并且客户端本身并不需要数据库，它会把相关的信息储存在K8s集群内的Secrets中。
 
-
-
 # 四、helm部署
-
-
 
 ![image-20220728140501620](https://github.com/user-attachments/assets/24ad9ace-5661-4ba6-a366-02aef4d6b541)
 
-
-
 ![image-20220728140538044](https://github.com/user-attachments/assets/85bf36d2-dd34-4a63-979c-e8115a8e7ab2)
-
-
-
-
 
 ![image-20220728140644543](https://github.com/user-attachments/assets/16305325-7b92-4f42-b063-d0d8fdae122a)
 ![image-20220728141000714](https://github.com/user-attachments/assets/cef1b5f4-8b15-4b32-a670-a3eb688ab4f8)
@@ -180,116 +124,82 @@ root@master01:/home/jeff# ls
 calico.yaml  helm-v3.18.3-linux-amd64.tar.gz  init.default.yaml  k8s  linux-amd64
 ~~~
 
-
-
 ~~~powershell
 root@master01:/home/jeff# cd linux-amd64/
 root@master01:/home/jeff/linux-amd64# ls
 helm  LICENSE  README.md
 ~~~
 
-
-
 ~~~powershell
 root@master01:/home/jeff/linux-amd64# mv helm /usr/bin
 ~~~
-
-
 
 ~~~powershell
 root@master01:/home/jeff/linux-amd64# helm version
 version.BuildInfo{Version:"v3.18.3", GitCommit:"6838ebcf265a3842d1433956e8a622e3290cf324", GitTreeState:"clean", GoVersion:"go1.24.4"}
 ~~~
 
-
-
-
-
-
-
 # 五、helm基础使用
 
-
-
 ## 5.1 添加及删除仓库
-
-
 
 ### 5.1.1 查看仓库
 
 ~~~powershell
-[root@master1 ~]# helm repo list
+root@master01:/home/jeff/linux-amd64# helm repo list
 Error: no repositories to show
 ~~~
 
-
-
 ### 5.1.2 添加新的仓库地址
 
-``` powershell
-微软源
-[root@k8s-master01 ~]# helm repo add stable http://mirror.azure.cn/kubernetes/charts/
-
-bitnami源
-[root@k8s-master01 ~]# helm repo add bitnami https://charts.bitnami.com/bitnami
-
-prometheus源
-[root@k8s-master01 ~]# helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 ```
-
-
-
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo add grafana https://grafana.github.io/helm-charts
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo add jetstack https://charts.jetstack.io
+helm repo update
+```
 ### 5.1.3 查看已经添加的仓库
 
-
-
 ~~~powershell
-[root@k8s-master01 ~]# helm repo list
-NAME    URL
-stable  http://mirror.azure.cn/kubernetes/charts/
+root@master01:/home/jeff/linux-amd64# helm repo list
+NAME                    URL
+bitnami                 https://charts.bitnami.com/bitnami
+grafana                 https://grafana.github.io/helm-charts
+prometheus-community    https://prometheus-community.github.io/helm-charts
+ingress-nginx           https://kubernetes.github.io/ingress-nginx
+jetstack                https://charts.jetstack.io
+elastic                 https://helm.elastic.co
+
 ~~~
-
-
 
 ### 5.1.4 更新仓库
 
 ```powershell
-[root@k8s-master01 ~]# helm repo update
+root@master01:/home/jeff/linux-amd64# helm repo update
 Hang tight while we grab the latest from your chart repositories...
-...Successfully got an update from the "stable" chart repository
+...Successfully got an update from the "ingress-nginx" chart repository
+...Successfully got an update from the "elastic" chart repository
+...Successfully got an update from the "jetstack" chart repository
+...Successfully got an update from the "grafana" chart repository
+...Successfully got an update from the "prometheus-community" chart repository
+...Successfully got an update from the "bitnami" chart repository
 Update Complete. ⎈Happy Helming!⎈
+
 ```
 
-
-
-**再查看**
-
-~~~powershell
-[root@master ~]# helm repo list
-NAME    URL
-stable  http://mirror.azure.cn/kubernetes/charts/
-~~~
-
-
-
 ### 5.1.5删除仓库
-
-
 
 ~~~powershell
 [root@k8s-master01 ~]# helm repo remove stable
 "stable" has been removed from your repositories
 ~~~
 
-
-
 ~~~powershell
 [root@k8s-master01 ~]# helm repo list
 Error: no repositories to show
 ~~~
-
-
-
 
 
 ## 5.2 查看charts
@@ -317,89 +227,121 @@ stable/bookstack                        1.2.4           0.27.5                  
 ......
 ~~~
 
-
-
 ~~~powershell
-[root@k8s-master01 ~]# helm search repo nginx
-NAME                            CHART VERSION   APP VERSION     DESCRIPTION
-stable/nginx-ingress            1.41.3          v0.34.1         DEPRECATED! An nginx Ingress controller that us...
-stable/nginx-ldapauth-proxy     0.1.6           1.13.5          DEPRECATED - nginx proxy with ldapauth
-stable/nginx-lego               0.3.1                           Chart for nginx-ingress-controller and kube-lego
-stable/gcloud-endpoints         0.1.2           1               DEPRECATED Develop, deploy, protect and monitor...
+root@master01:/home/jeff/linux-amd64# helm search repo nginx
+NAME                                            CHART VERSION   APP VERSION     DESCRIPTION
+bitnami/nginx                                   21.0.3          1.29.0          NGINX Open Source is a web server that can be a...
+bitnami/nginx-ingress-controller                11.6.27         1.12.3          NGINX Ingress Controller is an Ingress controll...
+bitnami/nginx-intel                             2.1.15          0.4.9           DEPRECATED NGINX Open Source for Intel is a lig...
+ingress-nginx/ingress-nginx                     4.12.3          1.12.3          Ingress controller for Kubernetes using NGINX a...
+prometheus-community/prometheus-nginx-exporter  1.7.0           1.4.2           A Helm chart for NGINX Prometheus Exporter
 ~~~
 
-
-
 ~~~powershell
-[root@k8s-master01 ~]# helm search repo tomcat
+root@master01:/home/jeff/linux-amd64# helm search repo tomcat
 NAME            CHART VERSION   APP VERSION     DESCRIPTION
-stable/tomcat   0.4.3           7.0             DEPRECATED - Deploy a basic tomcat application ...
+bitnami/tomcat  11.7.14         10.1.43         Apache Tomcat is an open-source web server desi...
 ~~~
-
-
 
 ## 5.3 部署应用 MySQL
 
 > 环境说明：k8s集群中存在storageclass:nfs-client
 
-
-
 我们现在安装一个 `mysql` 应用：
 
 ~~~powershell
-[root@k8s-master01 ~]# helm search repo mysql
-NAME                                    CHART VERSION   APP VERSION     DESCRIPTION
-stable/mysql                            1.6.9           5.7.30          DEPRECATED - Fast, reliable, scalable, and easy...
+root@master01:/home/jeff/linux-amd64# helm search repo mysql
+NAME                                            CHART VERSION   APP VERSION     DESCRIPTION
+bitnami/mysql                                   13.0.2          9.3.0           MySQL is a fast, reliable, scalable, and easy t...
+prometheus-community/prometheus-mysql-exporter  2.10.0          v0.17.2         A Helm chart for prometheus mysql exporter with...
+bitnami/phpmyadmin                              19.0.0          5.2.2           phpMyAdmin is a free software tool written in P...
+bitnami/mariadb                                 21.0.1          11.8.2          MariaDB is an open source, community-developed ...
+bitnami/mariadb-galera                          15.0.1          11.8.2          MariaDB Galera is a multi-primary database clus...
 ~~~
 
-
-
-~~~powershell
-[root@k8s-master01 ~]# helm install stable/mysql --generate-name  --set persistence.storageClass=nfs-client --set mysqlRootPassword=test123
-~~~
-
-
-
-~~~powershell
-部署过程输出的信息：
-NAME: mysql-1658996042
-LAST DEPLOYED: Thu Jul 28 16:14:03 2022
+```
+root@master01:/home/jeff/linux-amd64# apt install -y nfs-kernel-server
+root@master01:/home/jeff/linux-amd64# sudo mkdir -p /data/nfs
+root@master01:/home/jeff/linux-amd64# sudo chmod -R 777 /data/nfs
+root@master01:/home/jeff/linux-amd64# echo "/data/nfs *(rw,sync,no_subtree_check,no_root_squash)" | sudo tee -a /etc/exports
+/data/nfs *(rw,sync,no_subtree_check,no_root_squash)
+root@master01:/home/jeff/linux-amd64# sudo systemctl enable nfs-server
+root@master01:/home/jeff/linux-amd64# sudo systemctl start nfs-server
+root@master01:/home/jeff/linux-amd64# sudo exportfs -rv
+exporting *:/data/nfs
+root@master01:/home/jeff/linux-amd64# helm repo add nfs-subdir-external-provisioner https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
+"nfs-subdir-external-provisioner" has been added to your repositories
+root@master01:/home/jeff/linux-amd64# helm repo update
+Hang tight while we grab the latest from your chart repositories...
+...Successfully got an update from the "nfs-subdir-external-provisioner" chart repository
+...Successfully got an update from the "ingress-nginx" chart repository
+...Successfully got an update from the "elastic" chart repository
+...Successfully got an update from the "jetstack" chart repository
+...Successfully got an update from the "grafana" chart repository
+...Successfully got an update from the "prometheus-community" chart repository
+...Successfully got an update from the "bitnami" chart repository
+Update Complete. ⎈Happy Helming!⎈
+root@master01:/home/jeff/linux-amd64# helm install nfs-client nfs-subdir-external-provisioner/nfs-subdir-external-provisioner \
+  --set nfs.server=192.168.1.100 \
+  --set nfs.path=/data/nfs \
+  --set storageClass.name=nfs-client
+NAME: nfs-client
+LAST DEPLOYED: Sat Jul  5 12:45:17 2025
 NAMESPACE: default
 STATUS: deployed
 REVISION: 1
+TEST SUITE: None
+
+```
+~~~powershell
+root@master01:/home/jeff/linux-amd64# helm install bitnami/mysql --generate-name  --set persistence.storageClass=nfs-client --set mysqlRootPassword=test123
+~~~
+
+~~~powershell
+部署过程输出的信息：
+NAME: mysql-1751719720
+LAST DEPLOYED: Sat Jul  5 12:48:47 2025
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
 NOTES:
-MySQL can be accessed via port 3306 on the following DNS name from within your cluster:
-mysql-1658996042.default.svc.cluster.local
+CHART NAME: mysql
+CHART VERSION: 13.0.2
+APP VERSION: 9.3.0
 
-To get your root password run:
+Did you know there are enterprise versions of the Bitnami catalog? For enhanced secure software supply chain features, unlimited pulls from Docker, LTS support, or application customization, see Bitnami Premium or Tanzu Application Catalog. See https://www.arrow.com/globalecs/na/vendors/bitnami for more information.
 
-    MYSQL_ROOT_PASSWORD=$(kubectl get secret --namespace default mysql-1658996042 -o jsonpath="{.data.mysql-root-password}" | base64 --decode; echo)
+** Please be patient while the chart is being deployed **
+
+Tip:
+
+  Watch the deployment status using the command: kubectl get pods -w --namespace default
+
+Services:
+
+  echo Primary: mysql-1751719720.default.svc.cluster.local:3306
+
+Execute the following to get the administrator credentials:
+
+  echo Username: root
+  MYSQL_ROOT_PASSWORD=$(kubectl get secret --namespace default mysql-1751719720 -o jsonpath="{.data.mysql-root-password}" | base64 -d)
 
 To connect to your database:
 
-1. Run an Ubuntu pod that you can use as a client:
+  1. Run a pod that you can use as a client:
 
-    kubectl run -i --tty ubuntu --image=ubuntu:16.04 --restart=Never -- bash -il
+      kubectl run mysql-1751719720-client --rm --tty -i --restart='Never' --image  docker.io/bitnami/mysql:9.3.0-debian-12-r2 --namespace default --env MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD --command -- bash
 
-2. Install the mysql client:
+  2. To connect to primary service (read/write):
 
-    $ apt-get update && apt-get install mysql-client -y
+      mysql -h mysql-1751719720.default.svc.cluster.local -uroot -p"$MYSQL_ROOT_PASSWORD"
 
-3. Connect using the mysql cli, then provide your password:
-    $ mysql -h mysql-1658996042 -p
-
-To connect to your database directly from outside the K8s cluster:
-    MYSQL_HOST=127.0.0.1
-    MYSQL_PORT=3306
-
-    # Execute the following command to route the connection:
-    kubectl port-forward svc/mysql-1658996042 3306
-
-    mysql -h ${MYSQL_HOST} -P${MYSQL_PORT} -u root -p${MYSQL_ROOT_PASSWORD}
+WARNING: There are "resources" sections in the chart not set. Using "resourcesPreset" is not recommended for production. For production installations, please set the following values according to your workload needs:
+  - primary.resources
+  - secondary.resources
++info https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
 ~~~
-
-
-
 
 
 ~~~powershell
@@ -409,15 +351,11 @@ NAME                    NAMESPACE       REVISION        UPDATED                 
 mysql-1658996042        default         1               2022-07-28 16:14:03.530489788 +0800 CST deployed        mysql-1.6.9     5.7.30
 ~~~
 
-
-
 ~~~powershell
 [root@k8s-master01 ~]# kubectl get pods
 NAME                                     READY   STATUS    RESTARTS   AGE
 mysql-1658996042-755f5f64f6-j5s67        1/1     Running   0          82s
 ~~~
-
-
 
 ~~~powershell
 [root@k8s-master01 ~]# kubectl get pvc
@@ -1084,7 +1022,6 @@ TEST SUITE: None
 ~~~
 
 
-
 ### 5, 查看与验证
 
 ~~~powershell
@@ -1092,9 +1029,6 @@ TEST SUITE: None
 NAME                    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART                   APP VERSION
 nginx-1659144826        default         1               2022-07-30 09:33:46.881083524 +0800 CST deployed        helm-nginx-1.0.0
 ~~~
-
-
-
 
 
 ~~~powershell
@@ -1106,8 +1040,6 @@ pod/nfs-client-provisioner-9d46587b5-7n2vf   1/1     Running   4 (31m ago)   42h
 NAME                 TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)   AGE
 service/helm-nginx   ClusterIP   10.96.2.120   <none>        80/TCP    51s
 ~~~
-
-
 
 ```powershell
 [root@k8s-master01 nginx]# curl http://10.96.2.120
@@ -1281,9 +1213,6 @@ spec:
 ~~~
 
 
-
-
-
 ```powershell
 [root@k8s-master01 nginx]# helm install helm-nginx --set replicas=3 /helm/nginx
 NAME: helm-nginx
@@ -1294,19 +1223,12 @@ REVISION: 1
 TEST SUITE: None
 ```
 
-
-
-
-
 ```powershell
 [root@k8s-master01 nginx]# helm ls
 NAME            NAMESPACE       REVISION        UPDATED                                 STATUS          CHART                   APP VERSION
 helm-nginx      default         1               2022-07-30 09:54:00.744748457 +0800 CST deployed        helm-nginx-1.0.0
 
 ```
-
-
-
 ~~~powershell
 [root@k8s-master01 nginx]# kubectl get pods,svc
 NAME                                         READY   STATUS    RESTARTS      AGE
@@ -1319,20 +1241,14 @@ NAME                 TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)   AGE
 service/helm-nginx   ClusterIP   10.96.1.197   <none>        80/TCP    59s
 ~~~
 
-
-
 ### 6.3.5将Chart包进行打包
 
 > 将chart打包成一个压缩文件，便于存储与分享。
-
-
 
 ```powershell
 [root@k8s-master01 nginx]# helm package .
 Successfully packaged chart and saved it to: /helm/nginx/helm-nginx-1.0.0.tgz
 ```
-
-
 
 ~~~powershell
 [root@k8s-master01 nginx]# ls
@@ -1340,43 +1256,29 @@ Chart.yaml  helm-nginx-1.0.0.tgz  templates  values.yaml
 打包出mychart-0.1.0.tgz文件
 ~~~
 
-
-
 ### 6.3.6 使用Chart安装
 
 ~~~powershell
 [root@master nginx]# helm install helm-nginx2 /helm/nginx/helm-nginx-1.0.0.tgz
 ~~~
 
-
-
 # 七、Chart包托管至Harbor方案
-
-
 
 ## 7.1 集群外harbor服务器准备
 
 ### 7.1.1 docker-ce安装
 
-
-
 ~~~powershell
 wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo -O /etc/yum.repos.d/docker-ce.repo
 ~~~
-
-
 
 ~~~powershell
 [root@nfsserver harbor]# yum -y install docker-ce
 ~~~
 
-
-
 ~~~powershell
 [root@nfsserver harbor]# systemctl enable --now docker
 ~~~
-
-
 
 ### 7.1.2 docker-compose安装
 
@@ -1384,14 +1286,10 @@ wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo -O /etc/yu
 [root@nfsserver ~]# wget https://github.com/docker/compose/releases/download/1.25.0/docker-compose-Linux-x86_64
 ~~~
 
-
-
 ~~~powershell
 [root@nfsserver ~]# mv docker-compose-Linux-x86_64 /usr/bin/docker-compose
 [root@nfsserver ~]# chmod +x /usr/bin/docker-compose
 ~~~
-
-
 
 ~~~powershell
 [root@nfsserver ~]# docker-compose version
@@ -1401,28 +1299,20 @@ CPython version: 3.7.4
 OpenSSL version: OpenSSL 1.1.0l  10 Sep 2019
 ~~~
 
-
-
 ### 7.1.3 harbor服务器安装
 
 ~~~powershell
 [root@nfsserver ~]# wget https://github.com/goharbor/harbor/releases/download/v2.5.3/harbor-offline-installer-v2.5.3.tgz
 ~~~
 
-
-
 ~~~powershell
 [root@nfsserver harbor]# ls
 6864844_kubemsb.com.key  6864844_kubemsb.com.pem  common.sh  harbor.v2.5.3.tar.gz  harbor.yml.tmpl  install.sh  LICENSE  prepare
 ~~~
 
-
-
 ~~~powershell
 [root@nfsserver harbor]# mv harbor.yml.tmpl harbor.yml
 ~~~
-
-
 
 ~~~powershell
 # vim harbor.yaml
@@ -1465,13 +1355,9 @@ harbor_admin_password: 12345
 # Harbor DB configuration
 ~~~
 
-
-
 ~~~powershell
 [root@nfsserver harbor]# ./prepare
 ~~~
-
-
 
 ~~~powershell
 [root@nfsserver harbor]# ./install.sh -h
@@ -1482,48 +1368,30 @@ Please set --with-trivy if needs enable Trivy in Harbor
 Please set --with-chartmuseum if needs enable Chartmuseum in Harbor
 ~~~
 
-
-
 ~~~powershell
 [root@nfsserver harbor]# ./install.sh --with-chartmuseum
 ~~~
-
-
 
 ~~~powershell
 [root@nfsserver harbor]# docker ps
 ~~~
 
-
-
 > 在主机上解决域名 192.168.10.146 www.kubemsb.com
 
 ![image-20220730112415250](https://github.com/user-attachments/assets/553c9ebc-4390-4276-834a-58162013ca7b)
-
 ![image-20220730112450460](https://github.com/user-attachments/assets/7576625c-23d8-4e8b-bc88-50a8b5dd4829)
-
 ![image-20220730112550547](https://github.com/user-attachments/assets/fd959ece-02e0-4bc7-a420-ed7691be88a2)
-
 ![image-20220730112628591](https://github.com/user-attachments/assets/55c875ab-a3a4-49c9-9692-dbf009372e41)
-
 ![image-20220730112729226](https://github.com/user-attachments/assets/98a8345f-e612-4aa5-a76d-85d5fff10754)
-
 ![image-20220730113015244](https://github.com/user-attachments/assets/ba428e0e-8922-4c0e-b90a-b9a3e3b65c9e)
-
 ![image-20220730113039787](https://github.com/user-attachments/assets/6e9563d6-91ad-49c9-9b70-4a9ec6cf78cb)
-
 ![image-20220730113133287](https://github.com/user-attachments/assets/14c10cfd-d6f3-4669-a01e-c9a97c65e666)
-
 ![image-20220730113158610](https://github.com/user-attachments/assets/1a43fd43-6dd3-449d-8a9a-7dea18d9d3ed)
-
-
 
 ~~~powershell
 [root@k8s-master01 ~]# helm repo add harborhelm https://www.kubemsb.com/chartrepo/nginx --username admin --password 12345
 "harborhelm" has been added to your repositories
 ~~~
-
-
 
 ~~~powershell
 [root@k8s-master01 ~]# helm repo list
@@ -1533,15 +1401,11 @@ prometheus-community    https://prometheus-community.github.io/helm-charts
 harborhelm              https://www.kubemsb.com/chartrepo/nginx
 ~~~
 
-
-
 ~~~powershell
 [root@k8s-master01 ~]# helm search repo helm-nginx
 NAME                    CHART VERSION   APP VERSION     DESCRIPTION
 harborhelm/helm-nginx   1.0.0
 ~~~
-
-
 
 ~~~powershell
 [root@k8s-master01 ~]# helm install helm-nginx-test harborhelm/helm-nginx
@@ -1553,15 +1417,11 @@ REVISION: 1
 TEST SUITE: None
 ~~~
 
-
-
 ~~~powershell
 [root@k8s-master01 ~]# helm ls
 NAME            NAMESPACE       REVISION        UPDATED                                 STATUS          CHART                   APP VERSION
 helm-nginx-test default         1               2022-07-30 20:32:05.138180077 +0800 CST deployed        helm-nginx-1.0.0
 ~~~
-
-
 
 ~~~powershell
 [root@k8s-master01 ~]# kubectl get pods
@@ -1570,17 +1430,11 @@ helm-nginx-65f57fb758-2hkl6              1/1     Running   0             8s
 helm-nginx-65f57fb758-v427b              1/1     Running   0             8s
 ~~~
 
-
-
-
-
 ### 安装helmpush插件
 
 需要安装helmpush插件才能上传
 
 * 在线直接安装
-
-
 
 ~~~powershell
 [root@k8s-master01 nginx]# helm plugin install https://github.com/chartmuseum/helm-push
@@ -1590,18 +1444,12 @@ Installed plugin: cm-push
 
 ~~~
 
-
-
 ~~~powershell
 [root@k8s-master01 nginx]# ls /root/.local/share/helm/plugins/helm-push/bin/
 .  ..  helm-cm-push
 ~~~
 
-
-
 ### 将打包应用push到harbor
-
-
 
 ~~~powershell
 [root@k8s-master01 nginx]# ls
@@ -1619,7 +1467,6 @@ Chart.yaml  helm-nginx-1.1.0.tgz  templates  values.yaml
 ~~~
 
 
-
 ~~~powershell
 [root@k8s-master01 nginx]# helm -h
 The Kubernetes package manager
@@ -1627,9 +1474,6 @@ The Kubernetes package manager
 Available Commands:
   cm-push     Please see https://github.com/chartmuseum/helm-push for usage
 ~~~
-
-
-
 
 
 ~~~powershell
@@ -1653,18 +1497,12 @@ Kubeapps提供了一个开源的Helm UI界面，方便以图形界面的形式�
 
 ![image-20220730235006506](https://github.com/user-attachments/assets/5b3e18b7-bedb-4be9-a121-45b056b9a8a7)
 
-
-
 ## 8.2 使用helm部署kubeapps
-
-
 
 ~~~powershell
 [root@k8s-master01 ~]# helm repo add bitnami https://charts.bitnami.com/bitnami
 "bitnami" has been added to your repositories
 ~~~
-
-
 
 ~~~powershell
 [root@k8s-master01 ~]# helm repo list
@@ -1674,8 +1512,6 @@ prometheus-community    https://prometheus-community.github.io/helm-charts
 harborhelm              https://www.kubemsb.com/chartrepo/nginx
 bitnami                 https://charts.bitnami.com/bitnami
 ~~~
-
-
 
 ~~~powershell
 [root@k8s-master01 ~]# helm repo update
@@ -1687,8 +1523,6 @@ Hang tight while we grab the latest from your chart repositories...
 Update Complete. ⎈Happy Helming!⎈
 ~~~
 
-
-
 ~~~powershell
 [root@k8s-master01 ~]# helm search repo kubeapps
 NAME                    CHART VERSION   APP VERSION     DESCRIPTION
@@ -1696,21 +1530,14 @@ bitnami/kubeapps        10.0.2          2.4.6           Kubeapps is a web-based 
 ~~~
 
 
-
-
-
 ~~~powershell
 [root@k8s-master01 ~]# kubectl create ns kubeapps
 namespace/kubeapps created
 ~~~
 
-
-
 ~~~powershell
 [root@k8s-master01 ~]# helm install kubeapps bitnami/kubeapps --namespace kubeapps
 ~~~
-
-
 
 ~~~powershell
 输出信息：
@@ -1742,8 +1569,6 @@ To access Kubeapps from outside your K8s cluster, follow the steps below:
 2. Open a browser and access Kubeapps using the obtained URL.
 ~~~
 
-
-
 ~~~powershell
 [root@k8s-master01 ~]# kubectl get pods -n kubeapps
 NAME                                                         READY   STATUS    RESTARTS   AGE
@@ -1760,8 +1585,6 @@ kubeapps-internal-kubeops-58794f58c8-qk655                   1/1     Running   0
 kubeapps-postgresql-0                                        1/1     Running   0          96s
 ~~~
 
-
-
 ~~~powershell
 [root@k8s-master01 ~]# kubectl get svc -n kubeapps
 NAME                             TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)    AGE
@@ -1773,13 +1596,7 @@ kubeapps-postgresql              ClusterIP   10.96.0.235   <none>        5432/TC
 kubeapps-postgresql-hl           ClusterIP   None          <none>        5432/TCP   2m18s
 ~~~
 
-
-
-
-
 ## 8.3 访问kubeapps
-
-
 
 ~~~powershell
 [root@k8s-master01 ~]# vim kubeapps-ingress.yaml
@@ -1808,7 +1625,6 @@ spec:
 ~~~
 
 
-
 ~~~powershell
 [root@k8s-master01 ~]# kubectl apply -f kubeapps-ingress.yaml
 ingress.networking.k8s.io/ingress-kubeapps created
@@ -1827,7 +1643,6 @@ ingress.networking.k8s.io/ingress-kubeapps created
 [root@k8s-master01 ~]# kubectl create --namespace default serviceaccount kubeapps-operator
 serviceaccount/kubeapps-operator created
 ~~~
-
 
 ~~~powershell
 绑定集群管理员角色
@@ -1852,14 +1667,11 @@ EOF
 secret/kubeapps-operator-token created
 ~~~
 
-
-
 ~~~powershell
 获取访问token
 [root@k8s-master01 ~]# kubectl get --namespace default secret kubeapps-operator-token -o jsonpath='{.data.token}' -o go-template='{{.data.token | base64decode}}' && echo
 eyJhbGciOiJSUzI1NiIsImtpZCI6ImRneWtqS2s2OWFsZU94UklERWh5SlhMSk56SUZZQzZOYlhHbUZIaDZpcTQifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6Imt1YmVhcHBzLW9wZXJhdG9yLXRva2VuIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6Imt1YmVhcHBzLW9wZXJhdG9yIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiYjgzMjM3MDAtODI3MC00ODI5LWFmNmUtODg3N2FlNGM4OWQ3Iiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50OmRlZmF1bHQ6a3ViZWFwcHMtb3BlcmF0b3IifQ.NF4A7N394MwcRDQbHOTkahg_ODqi7OCV9CzP7zcb5kXwHo-DeQ20cf7CTYmyQCw1aKaYae-Vdi_ncJ9araSdapshoBX9zfQ4dl6rP6Z_g_rtHZBIe4rCopOPUqncY-OjonQL1R0MY8ODqE2BVPF3kHwcBnamT9c1nmib42fB_cIBqwu72c71LURvQifwiluriQZRJQWh20pM7p8aUkNXqvFId03iMdgmPXdOd5W2Kl1Rys2DUfPmRV1tmqXHuZOcMnHmSU7DzcaXcnoGesZUnB7sqtL2HhTn7iLnk323MaXzhNY5pWt2nZC-6U2ZFkPSkV2LZ1K6D2IxaImkZxRPVQ
 ~~~
-
 
 ![image-20220731005426854](https://github.com/user-attachments/assets/e1411af6-44ee-421d-9c7b-6c2223825099)
 
@@ -1889,7 +1701,6 @@ eyJhbGciOiJSUzI1NiIsImtpZCI6ImRneWtqS2s2OWFsZU94UklERWh5SlhMSk56SUZZQzZOYlhHbUZI
 ![image-20220731123010719](https://github.com/user-attachments/assets/23052862-50ea-44a4-ab37-124238fdfb6a)
 
 
-
 ~~~powershell
 [root@k8s-master01 nginx]# kubectl get pods -n kubeapps
 NAME                                                         READY   STATUS                       RESTARTS      AGE
@@ -1898,17 +1709,9 @@ kubemsb-web-nginx-55fdb5bfd6-4cfpg                           1/1     Running    
 ~~~
 
 
-
-
-
-
-
 ### 8.4.2 通过kubeapps部署mysql
 
-
-
 snv
-
 
 ![image-20220731123232615](https://github.com/user-attachments/assets/96f2e9bf-5d4c-46a4-aa7b-41b3ae489fc5)
 
@@ -1925,19 +1728,9 @@ snv
 ![image-20220731124059841](https://github.com/user-attachments/assets/9df37eed-0b82-48a7-819b-a1fc7664a254)
 
 
-
-
-
 ~~~powershell
 [root@k8s-master01 ~]# kubectl get pods
 NAME                                     READY   STATUS    RESTARTS      AGE
 kubemsb-web-db-mysql-primary-0           1/1     Running   0             5h29m
 kubemsb-web-db-mysql-secondary-0         1/1     Running   0             5h29m
 ~~~
-
-
-
-
-
-
-
