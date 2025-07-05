@@ -32,8 +32,7 @@
 
 ## 3.2 日志收集技术栈  EK(EFK)  + fluentd
 
-![image-20220408005109209](kubernetes日志收集方案 ELK.assets/image-20220408005109209.png)
-
+![image-20220408005109209](https://github.com/user-attachments/assets/d7e4c89f-ce6d-47ee-8308-29f8951b9589)
 
 
 
