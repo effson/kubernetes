@@ -70,3 +70,41 @@ kind: ConfigMap
 metadata:
   name: example-configmap-env-42cfbf598f
 ```
+#### 2.3.1.2 使用生成的configMap
+> base：deployment.yaml
+```
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: my-app
+  labels:
+  app: my-app
+spec:
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+      spec:
+        containers:
+        - name: app
+          image: my-app
+          volumeMounts:
+          - name: config
+            mountPath: /config
+        volumes:
+        - name: config
+          configMap:
+            name: example-configmap-env-42cfbf598f
+```
+> kustomization.yaml
+```
+resources:
+- deployment.yaml
+configMapGenerator:
+- name: example-configmap-env
+  envs:
+  - .env
+```
