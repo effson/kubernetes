@@ -47,4 +47,26 @@ kind: ConfigMap
 metadata:
   name: example-configmap-v1-g4hk9g2ff8
 ```
-##### 2.3.1.1.1 env文件生成configMap
+##### 2.3.1.1.2 env文件生成configMap
+```
+root@master01:/home/kustomize/k1# cat <<EOF >.env
+> FOO=Bar
+> EOF
+```
+```
+root@master01:/home/kustomize/k1# cat <<EOF >./kustomization.yaml
+> configMapGenerator:
+> - name: example-configmap-env
+>   envs:
+>   - .env
+> EOF
+```
+```
+root@master01:/home/kustomize/k1# kubectl kustomize ./
+apiVersion: v1
+data:
+  FOO: Bar
+kind: ConfigMap
+metadata:
+  name: example-configmap-env-42cfbf598f
+```
