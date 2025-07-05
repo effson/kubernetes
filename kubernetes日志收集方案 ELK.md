@@ -99,8 +99,7 @@
 ### 4.2.2 安装kibana
 
 
-
-![image-20220407154620497](kubernetes日志收集方案 ELK.assets/image-20220407154620497.png)
+![image-20220407154620497](https://github.com/user-attachments/assets/716dee19-ee01-45c7-b77a-7687a702c670)
 
 
 
@@ -110,29 +109,25 @@
 
 
 
-![image-20220407154735245](kubernetes日志收集方案 ELK.assets/image-20220407154735245.png)
+![image-20220407154735245](https://github.com/user-attachments/assets/5245ff93-f3d8-4002-81f2-44afe3f316be)
+
+
+
+
+![image-20220407154902092](https://github.com/user-attachments/assets/68f9fd1b-b123-4f59-ae0a-e2df10af9e4f)
 
 
 
 
 
-![image-20220407154902092](kubernetes日志收集方案 ELK.assets/image-20220407154902092.png)
-
-
-
-
-
-
-
-![image-20220407154953016](kubernetes日志收集方案 ELK.assets/image-20220407154953016.png)
+![image-20220407154953016](https://github.com/user-attachments/assets/f8cbff4d-bc25-4438-9c7e-490624a22355)
 
 
 
 
 
 
-
-![image-20220407155103366](kubernetes日志收集方案 ELK.assets/image-20220407155103366.png)
+![image-20220407155103366](https://github.com/user-attachments/assets/61f6dd61-df9e-43e7-b99f-0d8d48b3734a)
 
 
 
@@ -140,13 +135,12 @@
 
 
 
-![image-20220407155556894](kubernetes日志收集方案 ELK.assets/image-20220407155556894.png)
+![image-20220407155556894](https://github.com/user-attachments/assets/7be91f95-baa6-4cc3-ac98-104f263078d5)
 
 
 
 
-
-![image-20220407155702199](kubernetes日志收集方案 ELK.assets/image-20220407155702199.png)
+![image-20220407155702199](https://github.com/user-attachments/assets/406e7e39-752f-4605-86f7-11db40f951cc)
 
 
 
@@ -170,11 +164,13 @@
 
 
 
-![image-20220407160045282](kubernetes日志收集方案 ELK.assets/image-20220407160045282.png)
+
+![image-20220407160045282](https://github.com/user-attachments/assets/4735e635-27fd-4955-a328-74eb8792c93c)
 
 
 
-![image-20220407160127340](kubernetes日志收集方案 ELK.assets/image-20220407160127340.png)
+
+![image-20220407160127340](https://github.com/user-attachments/assets/7d9cf97c-cadf-49fd-937f-997f0edb044f)
 
 
 
@@ -201,10 +197,12 @@
 
 
 ![image-20220407160405048](kubernetes日志收集方案 ELK.assets/image-20220407160405048.png)
+![image-20220407160405048](https://github.com/user-attachments/assets/7fc565ce-d939-4ce4-b626-f0b0fcb197b7)
 
 
 
 ![image-20220407160443555](kubernetes日志收集方案 ELK.assets/image-20220407160443555.png)
+![image-20220407160443555](https://github.com/user-attachments/assets/3bcd6187-ee6f-4574-b7cb-9938feae81ce)
 
 
 
@@ -441,43 +439,45 @@ hello elasticsearch
 
 
 
-![image-20220407163953277](kubernetes日志收集方案 ELK.assets/image-20220407163953277.png)
+![image-20220407163953277](https://github.com/user-attachments/assets/6d3ea6cb-dd19-4390-a26a-b73be95696ac)
 
 
 
 
 
-![image-20220407165920127](kubernetes日志收集方案 ELK.assets/image-20220407165920127.png)
+![image-20220407165920127](https://github.com/user-attachments/assets/7662e903-4824-4696-a640-ad502207ebb4)
 
 
 
 
 
-![image-20220407165959162](kubernetes日志收集方案 ELK.assets/image-20220407165959162.png)
-
-
-
-
-
-![image-20220407170046439](kubernetes日志收集方案 ELK.assets/image-20220407170046439.png)
-
-
-
-![image-20220407170142024](kubernetes日志收集方案 ELK.assets/image-20220407170142024.png)
+![image-20220407165959162](https://github.com/user-attachments/assets/0c55478f-6e47-401d-9c98-ea67fd0865dd)
 
 
 
 
 
 
-
-![image-20220407172812976](kubernetes日志收集方案 ELK.assets/image-20220407172812976.png)
-
+![image-20220407170046439](https://github.com/user-attachments/assets/2a248d5c-93e2-4af9-bf4b-05b46b736951)
 
 
 
+![image-20220407170142024](https://github.com/user-attachments/assets/bea20c50-4f53-455b-ba89-3a043edc635d)
 
-![image-20220407172535568](kubernetes日志收集方案 ELK.assets/image-20220407172535568.png)
+
+
+
+
+
+
+![image-20220407172812976](https://github.com/user-attachments/assets/c434b3e8-c302-42fd-bfef-dd2243ff8379)
+
+
+
+
+
+
+![image-20220407172535568](https://github.com/user-attachments/assets/ada59954-0532-48be-9fe8-43a9c9e6e899)
 
 
 
@@ -564,13 +564,14 @@ output {
 
 
 
-![image-20220407175113144](kubernetes日志收集方案 ELK.assets/image-20220407175113144.png)
+
+![image-20220407175113144](https://github.com/user-attachments/assets/4a965d31-5f9b-4315-a40b-f0b0bf3ca91d)
 
 
 
 
 
-![image-20220407175159994](kubernetes日志收集方案 ELK.assets/image-20220407175159994.png)
+![image-20220407175159994](https://github.com/user-attachments/assets/1ddc4d86-b456-4c59-9372-40fa8720dc70)
 
 
 
@@ -728,35 +729,27 @@ k8s-logs-s8qw6                             1/1     Running   0          15s   10
 
 
 
-![image-20220407182931857](kubernetes日志收集方案 ELK.assets/image-20220407182931857.png)
+![image-20220407182931857](https://github.com/user-attachments/assets/9f3f3fe0-6399-4d98-b3d8-39b846c2c3d9)
 
 
 
+![image-20220407203219708](https://github.com/user-attachments/assets/75a97182-d667-4f60-a95d-a6619a6c1c77)
 
 
 
+![image-20220407203312600](https://github.com/user-attachments/assets/a20acb1d-4859-496f-8f30-15c97b97d03a)
 
 
 
-![image-20220407203219708](kubernetes日志收集方案 ELK.assets/image-20220407203219708.png)
+![image-20220407203403595](https://github.com/user-attachments/assets/7ec29c60-9868-4c35-a3d1-ca8196fed916)
 
 
 
-![image-20220407203312600](kubernetes日志收集方案 ELK.assets/image-20220407203312600.png)
+![image-20220407203454587](https://github.com/user-attachments/assets/9afe36b6-29ee-42ec-9dad-bf66f3e91836)
 
 
 
-![image-20220407203403595](kubernetes日志收集方案 ELK.assets/image-20220407203403595.png)
-
-
-
-![image-20220407203454587](kubernetes日志收集方案 ELK.assets/image-20220407203454587.png)
-
-
-
-
-
-![image-20220407203546362](kubernetes日志收集方案 ELK.assets/image-20220407203546362.png)
+![image-20220407203546362](https://github.com/user-attachments/assets/2ab7a9ac-18a7-4e26-9729-7d65ecdf372c)
 
 
 
@@ -996,30 +989,36 @@ k8s-logs-ndznb   1/1     Running   0          14s   10.244.194.84   k8s-worker1 
 
 
 ![image-20220407223459697](kubernetes日志收集方案 ELK.assets/image-20220407223459697.png)
+![image-20220407223459697](https://github.com/user-attachments/assets/ffb2cd37-9ccc-41e9-8634-ea9ad324aa5a)
 
 
 
 ![image-20220407223538269](kubernetes日志收集方案 ELK.assets/image-20220407223538269.png)
+![image-20220407223538269](https://github.com/user-attachments/assets/ebc01de4-8710-4053-b305-1471a7f4d21c)
 
 
 
 
 
 ![image-20220407223613198](kubernetes日志收集方案 ELK.assets/image-20220407223613198.png)
+![image-20220407223613198](https://github.com/user-attachments/assets/c7665045-c5a0-4759-98d2-e458bb01f022)
 
 
 
 ![image-20220407223651714](kubernetes日志收集方案 ELK.assets/image-20220407223651714.png)
+![image-20220407223651714](https://github.com/user-attachments/assets/02ca8e93-d753-4585-8ef2-4d2f17a23803)
 
 
 
 
 
 ![image-20220407223727384](kubernetes日志收集方案 ELK.assets/image-20220407223727384.png)
+![image-20220407223727384](https://github.com/user-attachments/assets/c755ab05-8661-41d0-baa1-1ad713fe8f46)
 
 
 
 ![image-20220407223838150](kubernetes日志收集方案 ELK.assets/image-20220407223838150.png)
+![image-20220407223838150](https://github.com/user-attachments/assets/b1172c4b-32bb-45cf-a9d3-beece54f26e1)
 
 
 
@@ -1267,19 +1266,15 @@ tomcat-demo-664584f857-xncpk   2/2     Running   0          5m33s
 
 
 
+![image-20220408002236127](https://github.com/user-attachments/assets/dd75e2b5-1bdf-4822-9e3d-c9e377c1b31d)
 
 
-![image-20220408002236127](kubernetes日志收集方案 ELK.assets/image-20220408002236127.png)
-
-
-
-
-
-![image-20220408002721389](kubernetes日志收集方案 ELK.assets/image-20220408002721389.png)
+![image-20220408002721389](https://github.com/user-attachments/assets/f72f0a26-c0cb-4028-a2d2-1f1201dfd12e)
 
 
 
-![image-20220408003250140](kubernetes日志收集方案 ELK.assets/image-20220408003250140.png)
+
+![image-20220408003250140](https://github.com/user-attachments/assets/d13a5f76-3c24-42b8-84e5-1b45ccc8bfcd)
 
 
 
@@ -1287,25 +1282,20 @@ tomcat-demo-664584f857-xncpk   2/2     Running   0          5m33s
 
 
 
-![image-20220408003550821](kubernetes日志收集方案 ELK.assets/image-20220408003550821.png)
+
+![image-20220408003550821](https://github.com/user-attachments/assets/db4e5528-6f99-43ce-a7f0-e254a762e4db)
+
+
+![image-20220408003610470](https://github.com/user-attachments/assets/b8daf800-d119-4b72-8119-ba567260bc85)
 
 
 
 
+![image-20220408003632515](https://github.com/user-attachments/assets/9dd2ae76-195a-4598-8f03-ad6b99e2a3c0)
 
 
 
-![image-20220408003610470](kubernetes日志收集方案 ELK.assets/image-20220408003610470.png)
-
-
-
-![image-20220408003632515](kubernetes日志收集方案 ELK.assets/image-20220408003632515.png)
-
-
-
-
-
-![image-20220408003733569](kubernetes日志收集方案 ELK.assets/image-20220408003733569.png)
+![image-20220408003733569](https://github.com/user-attachments/assets/5f0ff8c3-3bdc-4cfc-b1d8-b525c308541e)
 
 
 
