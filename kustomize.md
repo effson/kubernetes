@@ -19,20 +19,24 @@ kubectl apply -k <目录路径>
 root@master01:/home/kustomize/k1# cat <<EOF >application.properties
 > FOO=Bar
 > EOF
-
+```
+```
 root@master01:/home/kustomize/k1# ls
 application.properties
+```
+```
 root@master01:/home/kustomize/k1# cat <<EOF >./kustomization.yaml
 > configMapGenerator:
 > - name: example-configmap-v1
 >   files:
 >   - application.properties
 > EOF
-
+```
+```
 root@master01:/home/kustomize/k1# ls
 application.properties  kustomization.yaml
-
-
+```
+```
 root@master01:/home/kustomize/k1# kubectl kustomize ./
 apiVersion: v1
 data:
@@ -41,5 +45,4 @@ data:
 kind: ConfigMap
 metadata:
   name: example-configmap-v1-g4hk9g2ff8
-
 ```
