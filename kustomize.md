@@ -150,3 +150,64 @@ spec:
 - 为所有对象添加相同前缀/后缀
 - 为对象添加相同的标签(Label)集合
 - 为对象添加相同的注解(Annotations)集合
+> deployment.yaml
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+      spec:
+        containers:
+        - name: nginx
+          image: nginx
+```
+> kustomization.yaml
+```
+namespace: my-namespace
+namePrefix: dev-
+nameSuffix: "-001"
+commonLabels:
+  app: bingo
+commonAnnotations:
+  oncallPager: 400-500-600
+resources:
+- deployment.yaml
+```
+> kubectl kustomize ./
+```
+root@master01:/home/kustomize/k3# kubectl kustomize ./
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    oncallPager: 400-500-600
+  labels:
+    app: bingo
+  name: dev-nginx-deployment-001
+  namespace: my-namespace
+spec:
+  selector:
+    matchLabels:
+      app: bingo
+  template:
+    metadata:
+      annotations:
+        oncallPager: 400-500-600
+      labels:
+        app: bingo
+      spec:
+        containers:
+        - image: nginx
+          name: nginx
+
+```
