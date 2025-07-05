@@ -4,4 +4,11 @@
 
 # 2.kustomize 使用
 ## 2.1 kubectl使用kustomization文件管理k8s
-- kubectl 原生支持 kustomization.yaml，可以直接用 kubectl 来应用、查看或管理 Kustomize 管理的 Kubernetes 配置资源
+> kubectl 原生支持 kustomization.yaml，可以直接用 kubectl 来应用、查看或管理 Kustomize 管理的 Kubernetes 配置资源
+## 2.2 命令格式
+```
+kubectl kustomize <kustomization_directory>
+```
+```
+kubectl apply -k <目录路径>
+```
