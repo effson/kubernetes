@@ -520,3 +520,24 @@ vars:
       name: my-nginx
       apiVersion: v1
 ```
+新版推荐使用replacement:
+```
+namePrefix: dev-
+nameSuffix: "-001"
+
+resources:
+- deployment.yaml
+- service.yaml
+
+replacements:
+  - source:
+      kind: Service
+      name: my-nginx
+      fieldPath: metadata.name
+    targets:
+      - select:
+          kind: Deployment
+          name: my-nginx
+        fieldPaths:
+          - spec.template.spec.containers.0.command.2
+```
