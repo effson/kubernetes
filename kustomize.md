@@ -269,4 +269,13 @@ NAME                                                          READY   STATUS    
 my-nginx-684dd4dcd4-gxn7x                                     1/1     Running             0          30s
 my-nginx-684dd4dcd4-lk562                                     1/1     Running             0          30s
 ```
+> kubectl get -k ./
+```
+root@master01:/home/kustomize/k4# kubectl get -k ./
+NAME               TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+service/my-nginx   ClusterIP   10.96.126.170   <none>        80/TCP    5m7s
+
+NAME                       READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/my-nginx   2/2     2            2           2m8s
+```
 ##### 2.3.1.4.2 定制
