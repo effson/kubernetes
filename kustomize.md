@@ -423,7 +423,7 @@ patchesJson6902:
       name: my-nginx
     path: patch.yaml
 ```
-新版写法同样是应用patches：
+> kustomization.yaml 新版写法同样是应用patches：
 ```
 resources:
 - deployment.yaml
@@ -434,3 +434,37 @@ patches:
       name: my-nginx
 ```
 一样的作用
+###### 2.3.1.4.2.3 kustomization.yaml文件images字段注入
+> deployment.yaml同上
+> kustomization.yaml
+```
+resources:
+- deployment.yaml
+images:
+- name: nginx
+  newName: nginx
+  newTag: 1.25.0
+```
+> kubectl kustomize ./
+```
+root@master01:/home/kustomize/k7# kubectl kustomize ./
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      run: my-nginx
+  template:
+    metadata:
+      labels:
+        run: my-nginx
+    spec:
+      containers:
+      - image: nginx:1.25.0
+        name: my-nginx
+        ports:
+        - containerPort: 80
+```
