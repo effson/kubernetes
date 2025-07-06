@@ -210,3 +210,49 @@ spec:
         - image: nginx
           name: nginx
 ```
+#### 2.3.1.4 组合和定制资源
+##### 2.3.1.4.1 组合
+> deployment.yaml
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-nginx
+spec:
+  selector:
+    matchLabels:
+      run: my-nginx
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: my-nginx
+      spec:
+        containers:
+        - name: my-nginx
+          image: nginx
+          ports:
+          - containerPort: 80
+```
+> service.yaml
+```
+apiVersion: apps/v1
+kind: Service
+metadata:
+  name: my-nginx
+  labels:
+    run: my-nginx
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    run: my-nginx
+```
+> kustomization.yaml
+```
+resources:
+- deployment.yaml
+- service.yaml
+```
+##### 2.3.1.4.2 定制
