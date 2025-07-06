@@ -278,4 +278,10 @@ service/my-nginx   ClusterIP   10.96.126.170   <none>        80/TCP    5m7s
 NAME                       READY   UP-TO-DATE   AVAILABLE   AGE
 deployment.apps/my-nginx   2/2     2            2           2m8s
 ```
+> kubectl delete -k ./
+```
+root@master01:/home/kustomize/k4# kubectl delete -k ./
+service "my-nginx" deleted
+deployment.apps "my-nginx" deleted
+```
 ##### 2.3.1.4.2 定制
