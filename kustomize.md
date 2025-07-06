@@ -423,3 +423,17 @@ patchesJson6902:
       name: my-nginx
     path: patch.yaml
 ```
+新版写法同样是应用patches：
+```
+resources:
+- deployment.yaml
+#patchesStrategicMerge:
+#- increase-replica.yaml
+#- set-rmemory.yaml
+patches:
+  - path: patch.json
+    target:
+      kind: Deployment
+      name: my-nginx
+```
+一样的作用
