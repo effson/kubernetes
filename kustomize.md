@@ -693,7 +693,7 @@ root@master01:/home/kustomize# kustomize version
 v5.3.0
 ~~~
 
-## 3.2 kustomize使用
+## 3.2 kustomize创建资源
 > deployment.yaml文件同上
 > kustomization.yaml
 ```
@@ -740,5 +740,59 @@ spec:
     spec:
       containers:
       - image: nginx
+        name: my-nginx
+```
+## 3.3 kustomize修改资源
+
+```
+root@master01:/home/kustomize/k9# kustomize edit set image nginx=nginx:1.25.0
+
+root@master01:/home/kustomize/k9# vim kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: my-namespace
+namePrefix: dev-
+nameSuffix: "-001"
+
+labels:
+- pairs:
+    app: bingo
+
+commonAnnotations:
+  oncallPager: 400-500-600
+
+resources:
+- deployment.yaml
+images:
+- name: nginx
+  newName: nginx
+  newTag: 1.25.0
+```
+```
+root@master01:/home/kustomize/k9# kustomize build ./
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    oncallPager: 400-500-600
+  labels:
+    app: bingo
+  name: dev-prod-my-nginx-001
+  namespace: my-namespace
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      run: my-nginx
+  template:
+    metadata:
+      annotations:
+        oncallPager: 400-500-600
+      labels:
+        run: my-nginx
+    spec:
+      containers:
+      - image: nginx:1.25.0
         name: my-nginx
 ```
