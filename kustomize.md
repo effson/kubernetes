@@ -183,6 +183,25 @@ commonAnnotations:
 resources:
 - deployment.yaml
 ```
+建议使用新版:
+```
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: my-namespace
+namePrefix: dev-
+nameSuffix: "-001"
+
+labels:
+  - pairs:
+      app: bingo
+
+commonAnnotations:
+  oncallPager: "400-500-600"
+
+resources:
+  - deployment.yaml
+```
 > kubectl kustomize ./
 ```
 root@master01:/home/kustomize/k3# kubectl kustomize ./
@@ -673,3 +692,53 @@ root@master01:/home/kustomize# mv kustomize /usr/local/bin/
 root@master01:/home/kustomize# kustomize version
 v5.3.0
 ~~~
+
+## 3.2 kustomize使用
+> deployment.yaml文件同上
+> kustomization.yaml
+```
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: my-namespace
+namePrefix: dev-
+nameSuffix: "-001"
+
+labels:
+  - pairs:
+      app: bingo
+
+commonAnnotations:
+  oncallPager: "400-500-600"
+
+resources:
+  - deployment.yaml
+```
+> kustomize build ./
+```
+root@master01:/home/kustomize/k9# kustomize build ./
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    oncallPager: 400-500-600
+  labels:
+    app: bingo
+  name: dev-prod-my-nginx-001
+  namespace: my-namespace
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      run: my-nginx
+  template:
+    metadata:
+      annotations:
+        oncallPager: 400-500-600
+      labels:
+        run: my-nginx
+    spec:
+      containers:
+      - image: nginx
+        name: my-nginx
+```
