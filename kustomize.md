@@ -427,9 +427,6 @@ patchesJson6902:
 ```
 resources:
 - deployment.yaml
-#patchesStrategicMerge:
-#- increase-replica.yaml
-#- set-rmemory.yaml
 patches:
   - path: patch.json
     target:
