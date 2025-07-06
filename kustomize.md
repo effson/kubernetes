@@ -645,3 +645,31 @@ spec:
       - image: nginx
         name: my-nginx
 ```
+
+### 2.3.3 kustomize 应用、查看和删除对象
+```
+root@master01:/home/kustomize/kd_multi/prod# kubectl apply -k .
+service/prod-my-nginx created
+deployment.apps/prod-my-nginx created
+root@master01:/home/kustomize/kd_multi/prod# kubectl get -k .
+NAME                    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+service/prod-my-nginx   ClusterIP   10.109.16.235   <none>        80/TCP    13s
+
+NAME                            READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/prod-my-nginx   2/2     2            2           13s
+root@master01:/home/kustomize/kd_multi/prod# kubectl delete -k .
+service "prod-my-nginx" deleted
+deployment.apps "prod-my-nginx" deleted
+```
+# 3. kustomize客户端应用
+## 3.1 kustomize客户端下载
+~~~
+root@master01:/home/kustomize# curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
+v5.7.0
+kustomize installed to /home/kustomize/kustomize
+~~~
+~~~
+root@master01:/home/kustomize# mv kustomize /usr/local/bin/
+root@master01:/home/kustomize# kustomize version
+v5.3.0
+~~~
