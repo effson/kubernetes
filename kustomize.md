@@ -541,3 +541,50 @@ replacements:
         fieldPaths:
           - spec.template.spec.containers.0.command.2
 ```
+### 2.3.2 基准Bases与覆盖overlay
+```
+root@master01:/home/kustomize/kd_multi# mkdir base
+root@master01:/home/kustomize/kd_multi# mkdir dev
+root@master01:/home/kustomize/kd_multi# mkdir prod
+root@master01:/home/kustomize/kd_multi# ls
+base  dev  prod
+```
+在base目录创建deployment.yaml、service.yaml和kustomization.yaml:
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-nginx
+spec:
+  selector:
+    matchLabels:
+      run: my-nginx
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: my-nginx
+    spec:
+      containers:
+      - name: my-nginx
+        image: nginx
+```
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-nginx
+  labels:
+    run: my-nginx
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    run: my-nginx
+```
+```
+resources:
+- deployment.yaml
+- service.yaml
+```
