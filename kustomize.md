@@ -205,10 +205,10 @@ spec:
         oncallPager: 400-500-600
       labels:
         app: bingo
-      spec:
-        containers:
-        - image: nginx
-          name: nginx
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
 ```
 #### 2.3.1.4 组合和定制资源
 ##### 2.3.1.4.1 组合
@@ -285,7 +285,7 @@ service "my-nginx" deleted
 deployment.apps "my-nginx" deleted
 ```
 ##### 2.3.1.4.2 定制
-###### 2.3.1.4.2.1 patchesStrategicMerge
+###### 2.3.1.4.2.1 patchesStrategicMerge\pathes
 patchesStrategicMerge，它是 Kustomize 中用来局部修改资源字段的重要功能,可以使用它修改 base 目录中的 Deployment、Service 等资源:
 - 修改 replicas
 - 替换镜像
@@ -364,4 +364,62 @@ spec:
         resources:
           limits:
             memory: 512Mi
+```
+###### 2.3.1.4.2.2 patchesJson6902
+使用 RFC 6902 JSON Patch 语法，来对资源对象进行精确字段修改<br>
+> deployment.yaml
+> patch.yaml or patch.json
+```
+- op: replace
+  path: /spec/replicas
+  value: 3
+
+- op: add
+  path: /spec/template/spec/containers/0/resources
+  value:
+    limits:
+      memory: 512Mi
+```
+or:
+```
+[
+  {
+    "op": "replace",
+    "path": "/spec/replicas",
+    "value": 3
+  },
+  {
+    "op": "add",
+    "path": "/spec/template/spec/containers/0/resources",
+    "value": {
+      "limits": {
+        "memory": "512Mi"
+      }
+    }
+  }
+]
+```
+> kustomization.yaml
+```
+resources:
+- deployment.yaml
+patchesJson6902:
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: my-nginx
+    path: patch.json
+```
+or
+```
+resources:
+- deployment.yaml
+patchesJson6902:
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: my-nginx
+    path: patch.yaml
 ```
