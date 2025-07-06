@@ -255,6 +255,7 @@ resources:
 - deployment.yaml
 - service.yaml
 ```
-> kubectl kustomize ./
-结果是将两部分组合起来
+> kubectl kustomize ./<br>
+结果是将两部分组合起来<br>
+> kubectl apply -k ./
 ##### 2.3.1.4.2 定制
