@@ -227,12 +227,12 @@ spec:
     metadata:
       labels:
         run: my-nginx
-      spec:
-        containers:
-        - name: my-nginx
-          image: nginx
-          ports:
-          - containerPort: 80
+    spec:
+      containers:
+      - name: my-nginx
+        image: nginx
+        ports:
+        - containerPort: 80
 ```
 > service.yaml
 ```
@@ -258,4 +258,15 @@ resources:
 > kubectl kustomize ./<br>
 结果是将两部分组合起来<br>
 > kubectl apply -k ./
+```
+root@master01:/home/kustomize/k4# kubectl apply -k ./
+service/my-nginx unchanged
+deployment.apps/my-nginx created
+```
+```
+root@master01:/home/kustomize/k4# kubectl get pods
+NAME                                                          READY   STATUS              RESTARTS   AGE
+my-nginx-684dd4dcd4-gxn7x                                     1/1     Running             0          30s
+my-nginx-684dd4dcd4-lk562                                     1/1     Running             0          30s
+```
 ##### 2.3.1.4.2 定制
