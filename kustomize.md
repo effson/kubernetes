@@ -588,3 +588,60 @@ resources:
 - deployment.yaml
 - service.yaml
 ```
+进入dev目录，创建kustomization.yaml：
+```
+bases:
+- ../base
+namePrefix: dev-
+```
+进入prod目录，创建kustomization.yaml：
+```
+bases:
+- ../base
+namePrefix: prod-
+```
+推荐使用新版：
+```
+resources:
+- ../base
+namePrefix: prod-
+```
+> kubectl kustomize ./
+```
+root@master01:/home/kustomize/kd_multi# cd prod/
+
+root@master01:/home/kustomize/kd_multi/prod# ls
+kustomization.yaml
+
+root@master01:/home/kustomize/kd_multi/prod# kubectl kustomize ./
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: my-nginx
+  name: prod-my-nginx
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    run: my-nginx
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prod-my-nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      run: my-nginx
+  template:
+    metadata:
+      labels:
+        run: my-nginx
+    spec:
+      containers:
+      - image: nginx
+        name: my-nginx
+```
