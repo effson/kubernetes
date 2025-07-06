@@ -132,17 +132,17 @@ spec:
     metadata:
       labels:
         app: my-app
-      spec:
-        containers:
-        - image: my-app
-          name: app
-          volumeMounts:
-          - mountPath: /config
-            name: config
-        volumes:
-        - configMap:
-            name: example-configmap-env-42cfbf598f
+    spec:
+      containers:
+      - image: my-app
+        name: app
+        volumeMounts:
+        - mountPath: /config
           name: config
+      volumes:
+      - configMap:
+          name: example-configmap-env-42cfbf598f
+        name: config
 ```
 #### 2.3.1.3 设置贯穿性字段
 贯穿性字段在 Kustomize 中的术语叫做：全局变更字段（Global fields），也称为统一注入字段：使用场景如下：
@@ -467,4 +467,56 @@ spec:
         name: my-nginx
         ports:
         - containerPort: 80
+```
+###### 2.3.1.4.2.4 通过变量注入字段
+> deployment.yaml
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-nginx
+spec:
+  selector:
+    matchLabels:
+      run: my-nginx
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: my-nginx
+    spec:
+      containers:
+      - name: my-nginx
+        image: nginx
+        command: ["start","--host","$(MY_SERVICE_NAME)"]
+```
+> service.yaml
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-nginx
+  labels:
+    run: my-nginx
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    run: my-nginx
+```
+> kustomization.yaml
+```
+namePrefix: dev-
+nameSuffix: "-001"
+
+resources:
+- deployment.yaml
+
+vars:
+  - name: MY_SERVICE_NAME
+    objref:
+      kind: Service
+      name: my-nginx
+      apiVersion: v1
 ```
