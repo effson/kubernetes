@@ -255,4 +255,6 @@ resources:
 - deployment.yaml
 - service.yaml
 ```
+> kubectl kustomize ./
+结果是将两部分组合起来
 ##### 2.3.1.4.2 定制
