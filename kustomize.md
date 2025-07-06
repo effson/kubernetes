@@ -512,7 +512,7 @@ nameSuffix: "-001"
 
 resources:
 - deployment.yaml
-
+- service.yaml
 vars:
   - name: MY_SERVICE_NAME
     objref:
