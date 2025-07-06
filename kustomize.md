@@ -236,7 +236,7 @@ spec:
 ```
 > service.yaml
 ```
-apiVersion: apps/v1
+apiVersion: v1
 kind: Service
 metadata:
   name: my-nginx
@@ -285,3 +285,83 @@ service "my-nginx" deleted
 deployment.apps "my-nginx" deleted
 ```
 ##### 2.3.1.4.2 定制
+###### 2.3.1.4.2.1 patchesStrategicMerge
+patchesStrategicMerge，它是 Kustomize 中用来局部修改资源字段的重要功能,可以使用它修改 base 目录中的 Deployment、Service 等资源:
+- 修改 replicas
+- 替换镜像
+- 添加或修改 label/annotation
+- 更改 port、env、volume 等配置
+> deployment.yaml 同 2.3.1.4.1
+> increase-replica.yaml
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-nginx
+spec:
+  replicas: 3
+```
+> set-rmemory.yaml
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-nginx
+spec:
+  template:
+    spec:
+      containers:
+      - name: my-nginx
+        resources:
+          limits:
+            memory: 512Mi
+```
+> kustomization.yaml
+```
+resources:
+- deployment.yaml
+- service.yaml
+patchesStrategicMerge:
+- increase-replica.yaml
+- set-rmemory.yaml
+```
+新版：
+```
+resources:
+- deployment.yaml
+patches:
+  - path: increase-replica.yaml
+    target:
+      kind: Deployment
+      name: my-nginx
+  - path: set-memory.yaml
+    target:
+      kind: Deployment
+      name: my-nginx
+```
+> kubectl kustomize ./
+```
+root@master01:/home/kustomize/k5# kubectl kustomize ./
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      run: my-nginx
+  template:
+    metadata:
+      labels:
+        run: my-nginx
+    spec:
+      containers:
+      - image: nginx
+        name: my-nginx
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            memory: 512Mi
+```
