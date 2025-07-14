@@ -30,6 +30,7 @@ var (
 	GroupVersion = schema.GroupVersion{Group: "demo.jeff", Version: "v1"}
 
 	// SchemeBuilder is used to add go types to the GroupVersionKind scheme.
+	// 被app_types.go line
 	SchemeBuilder = &scheme.Builder{GroupVersion: GroupVersion}
 
 	// AddToScheme adds the types in this group-version to the given scheme.
