@@ -29,8 +29,11 @@ import (
 
 // AppReconciler reconciles a App object
 type AppReconciler struct {
-	client.Client
-	Scheme *runtime.Scheme
+	client.Client             // controller-runtime 提供的通用 Kubernetes 客户端接口，封装了对 API Server 的常见操作
+	Scheme *runtime.Scheme    /* main.go line 210    (&controller.AppReconciler{
+								Client: mgr.GetClient(),
+								Scheme: mgr.GetScheme(),
+								}).SetupWithManager(mgr)    */
 }
 
 // +kubebuilder:rbac:groups=demo.jeff,resources=apps,verbs=get;list;watch;create;update;patch;delete
