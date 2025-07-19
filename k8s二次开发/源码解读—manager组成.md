@@ -5,29 +5,40 @@ type controllerManager struct {
 	sync.Mutex
 	started bool  // 控制 manager 的启动状态，防止重复启动
 
-	stopProcedureEngaged *int64  // 	标记 shutdown 是否已开始
-	errChan              chan error  // 所有子组件的错误会通过这个通道上报
+	stopProcedureEngaged *int64  // 1. 标记 shutdown 是否已开始
+	errChan              chan error  // 4. 所有子组件的错误会通过这个通道上报
 	runnables            *runnables
+	/*3.
+	线程安全的任务注册与调度器，所有通过 mgr.Add() 注册的组件（如控制器、缓存、服务）
+	都会在 manager 启动时由 runnables 控制启动、停止、优雅退出
+ 	Cache、Webhook、LeaderElection、Others
+	*/
 
 	// cluster holds a variety of methods to interact with a cluster. Required.
-	cluster cluster.Cluster  /*与 Kubernetes 集群交互的多种方法，内部包含：Client: 与 API Server 通信（读写资源）
-Cache: informer 缓存
-Scheme: GVK 到 Go 类型的映射
-RESTMapper: GVK 到资源路径的映射 */
+	cluster cluster.Cluster
+	/* 2.与 Kubernetes 集群交互的多种方法，内部包含：
+	Client: 与 API Server 通信（读写资源）
+	Cache: informer 缓存
+	Scheme: GVK 到 Go 类型的映射
+	RESTMapper: GVK 到资源路径的映射
+	*/
 
 	// recorderProvider is used to generate event recorders that will be injected into Controllers
-	// (and EventHandlers, Sources and Predicates).
+	// (and EventHandlers, Sources and Predicates). 
 	recorderProvider *intrec.Provider
+	/* 5.提供 EventRecorder，用于在控制器中记录事件到 Kubernetes
+	（kubectl describe 能看到的那种）
+	*/ 
 
 	// resourceLock forms the basis for leader election
-	resourceLock resourcelock.Interface
+	resourceLock resourcelock.Interface  // 6. 控制 leader 选举的核心锁（ConfigMap 或 Lease）
 
 	// leaderElectionReleaseOnCancel defines if the manager should step back from the leader lease
 	// on shutdown
 	leaderElectionReleaseOnCancel bool
 
 	// metricsServer is used to serve prometheus metrics
-	metricsServer metricsserver.Server
+	metricsServer metricsserver.Server // 7. 提供/metrics endpoint 给 Prometheus
 
 	// healthProbeListener is used to serve liveness probe
 	healthProbeListener net.Listener
@@ -48,7 +59,7 @@ RESTMapper: GVK 到资源路径的映射 */
 	pprofListener net.Listener
 
 	// controllerConfig are the global controller options.
-	controllerConfig config.Controller
+	controllerConfig config.Controller // 8. 控制器全局配置（默认并发数、缓存配置等）
 
 	// Logger is the logger that should be used by this manager.
 	// If none is set, it defaults to log.Log global logger.
